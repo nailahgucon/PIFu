@@ -288,4 +288,4 @@ if __name__ == '__main__':
         args.input = args.input[:-1]
     subject_name = args.input.split('/')[-1]
     for subject in sorted(os.listdir(args.input)):
-        render_prt_ortho(args.out_dir, args.input, subject, shs, rndr, rndr_uv, args.size, 1, 1, pitch=[0])
+        render_prt_ortho(args.out_dir, args.input, subject, shs, rndr, rndr_uv, args.size, 10, 1, pitch=[0])
