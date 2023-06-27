@@ -12,6 +12,7 @@ import random
 import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import trimesh
 
 from lib.options import BaseOptions
 from lib.mesh_util import *
