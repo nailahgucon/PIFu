@@ -172,6 +172,10 @@ def train(opt):
 
                     ### for bounding box coordinates mapping from 2D image space to the 3D space
                     generated_pifu_mesh = trimesh.load('%s/%s/test_eval_epoch%d_%s.obj' % (opt.results_path, opt.name, epoch, test_data['name']), process=False)
+                    print("== shape ==")
+                    print(train_data['calib'].shape)
+                    print("== value ==")
+                    print(train_data['calib'])
                     generated_pifu_mesh.apply_transform(train_data['calib'])
                     generated_pifu_mesh.export('%s/%s/mapped_test_eval_epoch%d_%s.obj' % (opt.results_path, opt.name, epoch, test_data['name']))
                     ### end 
