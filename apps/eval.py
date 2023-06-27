@@ -20,6 +20,7 @@ from PIL import Image
 import torchvision.transforms as transforms
 import glob
 import tqdm
+import trimesh
 
 # get options
 opt = BaseOptions().parse()
@@ -103,6 +104,10 @@ class Evaluator:
                 gen_mesh_color(opt, self.netG, self.netC, self.cuda, data, save_path, use_octree=use_octree)
             else:
                 gen_mesh(opt, self.netG, self.cuda, data, save_path, use_octree=use_octree)
+
+            generated_pifu_mesh = trimesh.load('%s/%s/result_%s.obj' % (opt.results_path, opt.name, data['name']), process=False)
+            generated_pifu_mesh.apply_transform(data['calib'])
+            generated_pifu_mesh.export('%s/%s/new_result_%s.obj' % (opt.results_path, opt.name, data['name']))
 
 
 if __name__ == '__main__':
