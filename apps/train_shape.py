@@ -169,6 +169,12 @@ def train(opt):
                         opt.results_path, opt.name, epoch, test_data['name'])
                     gen_mesh(opt, netG, cuda, test_data, save_path)
 
+                    ### for bounding box coordinates mapping from 2D image space to the 3D space
+                    generated_pifu_mesh = trimesh.load('%s/%s/test_eval_epoch%d_%s.obj' % (opt.results_path, opt.name, epoch, test_data['name']), process=False)
+                    generated_pifu_mesh.apply_transform(train_data['calib'])
+                    generated_pifu_mesh.export('%s/%s/mapped_test_eval_epoch%d_%s.obj' % (opt.results_path, opt.name, epoch, test_data['name']))
+                    ### end 
+
                 print('generate mesh (train) ...')
                 train_dataset.is_train = False
                 for gen_idx in tqdm(range(opt.num_gen_mesh_test)):
